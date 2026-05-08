@@ -1,4 +1,6 @@
 # MITRE ATT&CK Knowledge Graph Intelligence (DS-GKG)
+<img width="1342" height="712" alt="image" src="https://github.com/user-attachments/assets/22374ea1-c711-4a55-a7d6-104b1d5dad67" />
+- graph for 20 rows of xl 
 
 ## 🎯 Project Aim
 The goal of this project is to create a **Domain Specific Generalized Knowledge Graph (DS-GKG)** for MITRE ATT&CK. It leverages Python, Neo4j, and the Google Gemini LLM to extract structured relationships between APT Groups, Tactics, and Software from raw datasets.
