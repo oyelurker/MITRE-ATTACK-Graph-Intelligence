@@ -1,0 +1,24 @@
+# Environments
+.env
+.env.example
+*.env
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Data files (keep repo lightweight)
+*.xlsx
+*.xls
+*.csv
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation references
+models.txt
