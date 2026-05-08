@@ -1,0 +1,6 @@
+langchain
+langchain-openai
+langchain-google-genai
+langchain-neo4j
+neo4j==5.25.0
+python-dotenv
