@@ -1,105 +1,50 @@
-# 🕸️ Simple GraphRAG with Neo4j & LangChain
+# MITRE ATT&CK Knowledge Graph Intelligence (DS-GKG)
 
-A proof-of-concept implementation of **Graph Retrieval-Augmented Generation (GraphRAG)**. Unlike traditional Vector RAG, this system builds a Knowledge Graph to understand *relationships* between entities for more accurate, grounded answers.
+## 🎯 Project Aim
+The goal of this project is to create a **Domain Specific Generalized Knowledge Graph (DS-GKG)** for MITRE ATT&CK. It leverages Python, Neo4j, and the Google Gemini LLM to extract structured relationships between APT Groups, Tactics, and Software from raw datasets.
 
-This version is configured to support both **Google Gemini**(preffered) and **OpenAI** models for entity extraction and generation.
-
----
-
-## 🚀 Features
-* **Knowledge Graph Construction:** Extracts entities and relationships from unstructured text using LLMs.
-* **Graph Storage:** Stores structured data natively in **Neo4j**.
-* **Graph Retrieval:** Uses Cypher queries to fetch relevant subgraphs for reasoning.
-* **Tech Stack:** Python, LangChain, Neo4j, Google Gemini / OpenAI.
-
----
-
-## 🛠️ Prerequisites
-Before running the project, ensure you have:
-1. **Python 3.10+**
-2. **Neo4j Desktop**
-   - Install and create a Local DBMS
-   - Set a password (needed for `.env`)
-   - Click **Start** before running the project
-3. **API Keys**
-   - Google Gemini API key OR OpenAI API key
-
----
-
-## 📦 Installation & Setup Guide
-
-### Step 1: Clone the Repository
-```bash
-git clone https://github.com/oyelurker/GraphRAG-Neo4j-LangChain
-cd GraphRAG-Neo4j-LangChain
-```
-
-### Step 2: Set Up Virtual Environment (Highly Recommended)
-Creating a virtual environment ensures dependencies don’t conflict with other projects.
-
-```bash
-# Windows
-python -m venv venv
-.\venv\Scripts\activate
-
-# Mac/Linux
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### Step 3: Install Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### Step 4: Configure Environment Variables
-
-Create `.env` file:
-```bash
-# Windows
-copy .env.example .env
-
-# Mac/Linux
-cp .env.example .env
-```
-
-Edit `.env`:
-```env
-# Neo4j Local Configuration (Using Bolt)
-NEO4J_URI=bolt://127.0.0.1:7687
-NEO4J_USERNAME=neo4j
-NEO4J_PASSWORD=your_local_db_password_here
-
-# API Keys
-GOOGLE_API_KEY=your_gemini_api_key_here
-OPENAI_API_KEY=your_openai_api_key_here
-
-# Neo4j Aura (Optional)
-# NEO4J_URI=neo4j+s://your_aura_instance.databases.neo4j.io
-# NEO4J_USERNAME=your_aura_username_here
-# NEO4J_PASSWORD=your_aura_password_here
-```
+## 🛠️ Assignment Overview
+This implementation fulfills the requirements for the Semester IV Project:
+- **Datasets**: Merges `attackmitre.xlsx` and `MitreEnterprise.xlsx` based on Tactic IDs.
+- **LLM Extraction**: Uses `gemini-1.5-flash` to identify and structure entity relationships.
+- **Database**: Stores the resulting graph in a Neo4j database for visualization and querying.
+- **Status**: Currently configured to process **20 records** for demonstration purposes to preserve API quota and ensure stability.
 
 ## 🚀 How to Run
-Make sure:
-- Neo4j is running on port `7687`
-- Virtual environment is activated
 
-Run:
+### 1. Prerequisites
+- Python 3.10+
+- Neo4j Desktop installed and running.
+- A Google Gemini API Key.
+
+### 2. Setup
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/oyelurker/MITRE-ATTACK-Graph-Intelligence.git
+   cd MITRE-ATTACK-Graph-Intelligence
+   ```
+2. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. **Configure Environment**:
+   - Create a `.env` file based on `.env.example`.
+   - Add your Neo4j password and Google API Key.
+
+### 3. Build the Graph
+Run the main script to process data and populate Neo4j:
 ```bash
-python graphrag.py
+python build_kg.py
 ```
 
----
+### 4. Visualize
+Open your Neo4j Browser and run the queries found in `Cypher_Queries.md` to see the results.
 
-## 🧠 How It Works
-1. **Ingestion:** Reads raw text documents  
-2. **Extraction:** LLM identifies entities (nodes) and relationships (edges)  
-3. **Storage:** Data stored in Neo4j  
-4. **Retrieval:** LangChain queries graph  
-5. **Answer:** LLM generates grounded response  
-
----
+## 📊 Future Work
+- Increase the processing limit to cover the full 11,000+ records.
+- Implement more complex relationship extraction (e.g., specific mitigation steps).
+- Integrate with the `graphrag.py` Q&A system for real-time threat intelligence.
 
 ## 📚 Reference
-* **[GraphRAG Explained: Building Knowledge-Grounded LLM Systems with Neo4j and LangChain](https://pub.towardsai.net/graphrag-explained-building-knowledge-grounded-llm-systems-with-neo4j-and-langchain-017a1820763e).
+* [MITRE ATT&CK Dataset Knowledge Graph Enhanced RAG](https://ieee-dataport.org/documents/mitre-attack-dataset-knowledge-graph-enhanced-rag-cyber-threat-intelligence)
+* Built using Google Gemini and LangChain logic.
